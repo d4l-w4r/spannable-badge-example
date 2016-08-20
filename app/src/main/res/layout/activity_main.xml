@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="examples.com.spannablebadges.BadgeListViewModel" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:gravity="fill"
+            android:textSize="12sp"
+            android:lineSpacingExtra="10sp"
+            android:textStyle="bold"
+            android:text="@{viewModel.renderedTagBadges}" />
+    </FrameLayout>
+</layout>
