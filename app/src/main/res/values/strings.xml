@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SpannableBadges</string>
+    <string name="default_click_behavior">I have been clicked!</string>
 </resources>

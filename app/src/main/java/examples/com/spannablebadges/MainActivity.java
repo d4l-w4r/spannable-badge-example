@@ -1,11 +1,14 @@
 package examples.com.spannablebadges;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableStringBuilder;
-
+import android.text.method.LinkMovementMethod;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,8 +46,14 @@ public class MainActivity extends AppCompatActivity {
         dataBinding = DataBindingUtil.bind(findViewById(R.id.content));
 
         final TagBadgeBuilder badgeBuilder = new AndroidTagBadgeBuilder(new SpannableStringBuilder(), 2, TEXT_COLOR);
-        viewModel = new BadgeListViewModel(badgeBuilder);
+        viewModel = new BadgeListViewModel(badgeBuilder, getDefaultClickAction());
         dataBinding.setViewModel(viewModel);
+
+        // This is absolutely needed. It makes things on the TextView (badgeContainer) clickable
+        dataBinding.badgeContainer.setMovementMethod(LinkMovementMethod.getInstance());
+
+        // This prevents TextView from drawing a highlighted background for clicked spans
+        dataBinding.badgeContainer.setHighlightColor(Color.TRANSPARENT);
 
         loadData();
     }
@@ -59,4 +68,16 @@ public class MainActivity extends AppCompatActivity {
         // Logic to fetch data. Just insert dummy list for now
         viewModel.setTags(dummyTagData);
     }
+
+    public SpannableClickAction getDefaultClickAction() {
+        final Context context = this;
+        return new SpannableClickAction() {
+
+            @Override
+            public void onClick() {
+                Toast.makeText(context, R.string.default_click_behavior, Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
+
 }
