@@ -4,6 +4,7 @@ package examples.com.spannablebadges;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.text.Spanned;
 import android.text.style.LineHeightSpan;
 import android.text.style.ReplacementSpan;
 
@@ -46,8 +47,19 @@ public class TagBadgeSpannable extends ReplacementSpan implements LineHeightSpan
     }
 
     @Override
-    public void chooseHeight(CharSequence charSequence, int i, int i1, int i2, int i3, Paint.FontMetricsInt fontMetricsInt) {
-        fontMetricsInt.bottom += lineHeight;
-        fontMetricsInt.descent += lineHeight;
+    public void chooseHeight(CharSequence text, int start, int end, int spanstartv, int v, Paint.FontMetricsInt fm) {
+
+        int incr = Math.round(0.36F * fm.ascent); // note: ascent is negative
+
+        // first line: add space to the top
+        if (((Spanned) text).getSpanStart(this) == start) {
+            fm.ascent += incr;
+        }
+
+        // last line: add space to the bottom
+        if (((Spanned) text).getSpanEnd(this) == end) {
+            fm.bottom -= incr;
+        }
+
     }
 }

@@ -17,13 +17,13 @@
             android:id="@+id/badge_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="18dp"
-            android:paddingBottom="18dp"
+            android:paddingTop="25dp"
+            android:paddingBottom="25dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:gravity="fill"
             android:textSize="12sp"
-            android:lineSpacingExtra="10sp"
+            android:lineSpacingExtra="12sp"
             android:textStyle="bold"
             android:text="@{viewModel.renderedTagBadges}" />
     </FrameLayout>
